@@ -1,21 +1,27 @@
-int sensorValue = 0;
-
-void setup()
+int ledPin = 12;
+int sensorPin = 2;
+    
+     
+//byte leds = 0;
+     
+void setup() 
 {
-  pinMode(A0, INPUT);
-  pinMode(9, OUTPUT);
   Serial.begin(9600);
+	pinMode(ledPin, OUTPUT);
+	pinMode(sensorPin, INPUT);    
 }
 
-
-void loop()
+void loop() 
 {
-  // read the value from the sensor
-  sensorValue = analogRead(A0);
-  // print the sensor reading so you know its range
-  Serial.println(sensorValue);
+  Serial.println(digitalRead(sensorPin));
+	if (digitalRead(sensorPin) == 1)
+	{
+		digitalWrite(ledPin, HIGH);
+	}
+	else
+	{
+		digitalWrite(ledPin, LOW);
+	}
   
-  // map the sensor reading to a range for the LED
-  analogWrite(9, map(sensorValue, 0, 1023, 0, 255));
-  delay(100); // Wait for 100 millisecond(s)
+  delay(100);
 }
